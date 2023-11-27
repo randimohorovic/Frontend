@@ -1,6 +1,6 @@
-<template>
-  <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <template>
+    <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a id="logo" class="navbar-brand" href="/">JobQuest</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -8,7 +8,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class ="nav-link">
+        <a  class ="nav-link">
         <router-link to="/">Home</router-link> </a>
       </li>
       <li class="nav-item active">
@@ -49,7 +49,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #000000;
 }
 
 #nav {
@@ -59,13 +59,18 @@
   a {
     font-weight: bold;
     color: #ccc;
-
+    &:hover{
+      color: #FDD835;
+      text-decoration: none;
+    }
     &.router-link-exact-active {
       border-bottom: 2px solid #FDD835;
-      color: #FDD835;  // #42b983
+      color: #FDD835;  
     }
+
   }
   
+
   .navbar-toggler {
     
     &:active {
@@ -75,6 +80,11 @@
     border-color: #FDD835;
   }
  
+}
+#logo {
+  &:hover {
+    color:#FDD835 !important;
+  }
 }
 
 #search {
