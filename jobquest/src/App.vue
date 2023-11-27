@@ -30,9 +30,9 @@
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <form  class="form-inline my-2 my-lg-0">
+      <input id="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button id="button" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
 
@@ -54,15 +54,49 @@
 
 #nav {
   padding: 10px;
-  background-color: lightblue !important;
-
+  background-color: #000 !important;
+  
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #ccc;
 
     &.router-link-exact-active {
-      color: #42b983;
+      border-bottom: 2px solid #FDD835;
+      color: #FDD835;  // #42b983
     }
   }
+  
+  .navbar-toggler {
+    
+    &:active {
+      border-color: blue ;
+    }
+    background-color: #FDD835;
+    border-color: #FDD835;
+  }
+ 
 }
+
+#search {
+  border-color: #FDD835; // search input outline
+  
+}
+
+#button {
+  color: #FDD835; // "search"
+  border-color: #FDD835; // outline buttona 
+  &:hover {
+    background-color: #FDD835 !important; //hover button color, obrub mi smeta..
+    color: #000000;
+  }
+  // &:active {
+  //     border-color: #cd0000 !important;
+  //   }
+  // &:focus{
+  //   border-color: ;
+  // }
+}
+
+
+
 </style>
