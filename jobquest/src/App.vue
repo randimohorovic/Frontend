@@ -50,6 +50,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #000000;
+  
 }
 
 #nav {
@@ -79,7 +80,7 @@
     background-color: #FDD835;
     border-color: #FDD835;
   }
- 
+  
 }
 #logo {
   &:hover {
@@ -106,7 +107,6 @@
   //   border-color: ;
   // }
 }
-
 
 
 </style>

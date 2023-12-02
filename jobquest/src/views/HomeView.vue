@@ -1,8 +1,7 @@
 <template>
-
   <!-- carousel nece se prikazat -->
 
-<!-- <div id="carouselExample" class="carousel slide">
+  <!-- <div id="carouselExample" class="carousel slide">
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="@/assets/bootstrap.png" class="d-block w-100">
@@ -25,41 +24,26 @@
   </button>
 </div> -->
 
-
-<!-- cards -->
-<div class="row">
-  <div class="col-2">filtri/linkovi
+  <!-- cards -->
+  <div class="row">
+    <div class="col-2">filtri/linkovi</div>
+    <div class="col-7"> <Listing-Job />
+      <Listing-Job />
+      <Listing-Job />
+    </div>
+    <div class="col-3">blok</div>
   </div>
-  <div class="col-7">
-    <div class="card text-center">
-  <div class="card-header">
-    Featured
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-  <div class="card-footer text-body-secondary">
-    2 days ago
-  </div>
-</div>
-    
-  </div>
-  <div class="col-3">blok
-   </div>
-  </div>
- </template>
+</template>
 
 <script>
 // @ is an alias to /src
-// 
-import HelloWorld from "@/components/HelloWorld.vue";
+//
+import ListingJob from '@/components/Listing.vue';
 
 export default {
-  name: "HomeView",
+  name: 'HomeView',
   components: {
-    HelloWorld,
+  ListingJob,
   },
 };
 </script>
