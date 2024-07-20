@@ -2,39 +2,22 @@ import React from "react";
 import { Navbar, TextInput, Button } from "flowbite-react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
-import { Link } from "react-router-dom"; // da mozemo kroz rute ic
+import { Link, useLocation } from "react-router-dom"; // da mozemo kroz rute ic
 
 // header mi je fixan kroz cijelu apk pa mi treba kao komponenta
 export default function Baner() {
+  const location = useLocation();
+  const ruta = location.pathname;
   return (
-    <Navbar className="border-b-2  items-center ">
-      <Link to="/" className="flex ">
+    <Navbar className="border-b-2   ">
+      <Link to="/" className=" ">
         <h1 className="font-bold text-sm sm:text-xl">
-          <span className="text-slate-500">Jobquest</span>
+          <span className="px-2 py-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg text-white">
+            Jobquest
+          </span>
         </h1>
       </Link>
-      {/* <div className="flex item-center">
-        <ul className="flex gap-7">
-          <Link to="/">
-            <li className="hidden sm:inline text-slate-700 hover:underline">
-              Home
-            </li>
-          </Link>
-          <Link to="profil">
-            <li className="hidden sm:inline text-slate-700 hover:underline">
-              Profil
-            </li>
-          </Link>
-          <Link to="sign-in">
-            <li className="hidden sm:inline text-slate-700 hover:underline">
-              Prijava
-            </li>
-          </Link>
-          <li className="hidden sm:inline text-slate-700 hover:underline">
-            Odjava
-          </li>
-        </ul>i want to
-      </div> */}
+
       <form className="flex items-center gap-2">
         <TextInput
           type="text"
@@ -43,14 +26,13 @@ export default function Baner() {
         />
         <Button
           type="submit"
-          color="blue"
+          color="gray"
           className="flex items-center px-4 py-2 w-12 h-10 lg:hidden pill"
         >
-          <AiOutlineSearch className="text-blue-500" />
-          Search
+          <AiOutlineSearch className="" />
         </Button>
       </form>
-      <div className="flex gap-2 md:order-4">
+      <div className="flex gap-2 md:order-2">
         <Button className="w-12 h-10 hidden sm:inline" color="gray" round>
           <FaMoon />
         </Button>
@@ -64,18 +46,43 @@ export default function Baner() {
         </Link>
         <Navbar.Toggle />
       </div>
+
       <Navbar.Collapse>
-        <Navbar.Link>
+        <Navbar.Link
+          active={ruta === "/"}
+          as={"div"}
+          className={`${
+            ruta === "/" ? "text-blue-500" : "text-slate-700"
+          } hover:text-blue-700`}
+        >
           <Link to="/">Home</Link>
         </Navbar.Link>
-        <Navbar.Link>
-          <Link to="/">O nama</Link>
+        <Navbar.Link
+          active={ruta === "/about"}
+          as={"div"}
+          className={`${
+            ruta === "/about" ? "text-blue-500" : "text-slate-700"
+          } hover:text-blue-700`}
+        >
+          <Link to="/about">O nama</Link>
         </Navbar.Link>
-        <Navbar.Link>
-          <Link to="/">Profil</Link>
+        <Navbar.Link
+          active={ruta === "/profil"}
+          as={"div"}
+          className={`${
+            ruta === "/profil" ? "text-blue-500" : "text-slate-700"
+          } hover:text-blue-700`}
+        >
+          <Link to="/profil">Profil</Link>
         </Navbar.Link>
-        <Navbar.Link>
-          <Link to="/">Odjava</Link>
+        <Navbar.Link
+          active={ruta === "/logout"}
+          as={"div"}
+          className={`${
+            ruta === "/logout" ? "text-blue-500" : "text-slate-700"
+          } hover:text-blue-700`}
+        >
+          <Link to="/logout">Odjava</Link>
         </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
