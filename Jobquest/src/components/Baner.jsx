@@ -52,7 +52,7 @@ export default function Baner() {
           active={ruta === "/"}
           as={"div"}
           className={`${
-            ruta === "/" ? "text-blue-500" : "text-slate-700"
+            ruta === "/" ? "text-cyan-500" : "text-slate-700"
           } hover:text-blue-700`}
         >
           <Link to="/">Home</Link>
@@ -61,7 +61,7 @@ export default function Baner() {
           active={ruta === "/about"}
           as={"div"}
           className={`${
-            ruta === "/about" ? "text-blue-500" : "text-slate-700"
+            ruta === "/about" ? "text-cyan-500" : "text-slate-700"
           } hover:text-blue-700`}
         >
           <Link to="/about">O nama</Link>
@@ -70,7 +70,7 @@ export default function Baner() {
           active={ruta === "/profil"}
           as={"div"}
           className={`${
-            ruta === "/profil" ? "text-blue-500" : "text-slate-700"
+            ruta === "/profil" ? "text-cyan-500" : "text-slate-700"
           } hover:text-blue-700`}
         >
           <Link to="/profil">Profil</Link>
@@ -79,10 +79,19 @@ export default function Baner() {
           active={ruta === "/logout"}
           as={"div"}
           className={`${
-            ruta === "/logout" ? "text-blue-500" : "text-slate-700"
-          } hover:text-blue-700`}
+            ruta === "/logout" ? "text-cyan-500" : "text-slate-700"
+          } hover:text-white-700`}
         >
           <Link to="/logout">Odjava</Link>
+        </Navbar.Link>
+        <Navbar.Link
+          active={ruta === "/logout"}
+          as={"div"}
+          className={`${
+            ruta === "/sign-up" ? "text-cyan-500" : "text-slate-700"
+          } hover:text-white-700`}
+        >
+          <Link to="/sign-up">Kreiraj račun</Link>
         </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
