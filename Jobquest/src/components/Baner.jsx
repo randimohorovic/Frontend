@@ -9,7 +9,7 @@ export default function Baner() {
   const location = useLocation();
   const ruta = location.pathname;
   return (
-    <Navbar className="border-b-2   ">
+    <Navbar className="border-b-2  flex ">
       <Link to="/" className=" ">
         <h1 className="font-bold text-sm sm:text-xl">
           <span className="px-2 py-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg text-white">
@@ -29,17 +29,21 @@ export default function Baner() {
           color="gray"
           className="flex items-center px-4 py-2 w-12 h-10 lg:hidden pill"
         >
-          <AiOutlineSearch className="" />
+          <AiOutlineSearch />
         </Button>
       </form>
       <div className="flex gap-2 md:order-2">
-        <Button className="w-12 h-10 hidden sm:inline" color="gray" round>
+        <Button
+          className="w-12 h-10 hidden sm:inline"
+          color="gray"
+          round="true"
+        >
           <FaMoon />
         </Button>
         <Link to="/sign-in">
           <button
             type="button"
-            class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800  hidden sm:inline font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+            className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800  hidden sm:inline font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
           >
             Prijava
           </button>
@@ -55,7 +59,7 @@ export default function Baner() {
             ruta === "/" ? "text-cyan-500" : "text-slate-700"
           } hover:text-blue-700`}
         >
-          <Link to="/">Home</Link>
+          <Link to="/">Home </Link>
         </Navbar.Link>
         <Navbar.Link
           active={ruta === "/about"}
@@ -64,7 +68,7 @@ export default function Baner() {
             ruta === "/about" ? "text-cyan-500" : "text-slate-700"
           } hover:text-blue-700`}
         >
-          <Link to="/about">O nama</Link>
+          <Link to="/about"> O nama</Link>
         </Navbar.Link>
         <Navbar.Link
           active={ruta === "/profil"}
@@ -73,7 +77,7 @@ export default function Baner() {
             ruta === "/profil" ? "text-cyan-500" : "text-slate-700"
           } hover:text-blue-700`}
         >
-          <Link to="/profil">Profil</Link>
+          <Link to="/profil">Profil </Link>
         </Navbar.Link>
         <Navbar.Link
           active={ruta === "/logout"}

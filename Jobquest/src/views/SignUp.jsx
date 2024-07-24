@@ -3,39 +3,51 @@ import { Label, TextInput } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
-  // const [userData, setFormData] = useState({});
-  // const [error, setError] = useState({});
-  // const navigate = useNavigate();
-  // const onchange = (e) => {
-  //   setFormData({
-  //     ...userData,
-  //     [e.target.id]: e.target.value,
-  //   });
-  // };
-  // console.log(userData);
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const res = await fetch("/backend/auth/signup", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(userData),
-  //   });
-  //   const data = await res.json();
-  //   if (data.success === false) {
-  //     setError(data.message);
-  //     return;
-  //   }
+  const [userData, setUserData] = useState({});
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  //   console.log(data);
-  // };
-  // console.log(userData);
+  const handleChange = (e) => {
+    setUserData({
+      ...userData,
+      [e.target.id]: e.target.value.trim(),
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // setError(""); // Clear previous error
+    if (!userData.username || !userData.email || !userData.password) {
+      return setError("ispuni sva polja!");
+    }
+
+    try {
+      setError(null);
+      const res = await fetch("/backend/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
+      });
+
+      const data = await res.json();
+      console.log("Response Data:", data); // Debugging: log the response data
+
+      if (data.success === false) {
+        return setError(data.message);
+      }
+      if (res.ok) {
+        navigate("/sign-in");
+      }
+    } catch (err) {
+      console.error("Error:", err); // Debugging: log any error
+      setError(error.message);
+    }
+  };
+
   return (
     <div className="main-h-screen mt-20">
-      <div
-        className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center
-      gap-5"
-      >
-        {/* ljeva strana */}
+      <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
+        {/* Left side */}
         <div className="flex-1">
           <Link to="/" className="text-4xl font-bold">
             <span className="px-2 py-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg text-white">
@@ -45,36 +57,47 @@ export default function SignUp() {
           <p className="text-sm mt-5">Ovjde možete kreirati svoj račun!</p>
         </div>
 
-        {/* desna strana*/}
+        {/* Right side */}
         <div className="flex-1">
-          <form className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            {error && <div className="text-red-500">{error.message}</div>}
             <div>
               <Label value="Korisničko ime" />
               <TextInput
                 type="text"
                 placeholder="Korisničko ime"
                 id="username"
+                onChange={handleChange}
               />
             </div>
             <div>
               <Label value="Email" />
-              <TextInput type="text" placeholder="@" id="email" />
+              <TextInput
+                type="email"
+                placeholder="Email"
+                id="email"
+                onChange={handleChange}
+              />
             </div>
             <div>
               <Label value="Lozinka" />
-              <TextInput type="text" placeholder="Lozinka" id="password" />
+              <TextInput
+                type="password"
+                placeholder="Lozinka"
+                id="password"
+                onChange={handleChange}
+              />
             </div>
             <button
               type="submit"
-              class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800  hidden sm:inline font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+              className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2"
             >
               Kreiraj račun
             </button>
           </form>
           <div className="flex gap-1 mt-3 text-sm font-bold">
             <p>Imate li račun? </p>
-            <Link to={"/sign-in"}>
-              {" "}
+            <Link to="/sign-in">
               <span className="text-cyan-600">Prijavi se</span>
             </Link>
           </div>

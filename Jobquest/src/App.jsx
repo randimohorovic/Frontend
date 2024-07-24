@@ -5,6 +5,7 @@ import SignUp from "./views/SignUp";
 import About from "./views/About";
 import Profile from "./views/Profile";
 import Baner from "./components/Baner";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="about" element={<About />} />
         <Route path="profile" element={<Profile />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
