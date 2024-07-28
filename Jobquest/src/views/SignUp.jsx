@@ -16,7 +16,7 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setError(""); // Clear previous error
+
     if (!userData.username || !userData.email || !userData.password) {
       return setError("ispuni sva polja!");
     }
@@ -30,16 +30,16 @@ export default function SignUp() {
       });
 
       const data = await res.json();
-      console.log("Response Data:", data); // Debugging: log the response data
+      console.log("Response Data:", data);
 
       if (data.success === false) {
         return setError(data.message);
       }
       if (res.ok) {
-        navigate("/sign-in");
+        navigate("/log-in");
       }
     } catch (err) {
-      console.error("Error:", err); // Debugging: log any error
+      console.error("Error:", err);
       setError(error.message);
     }
   };
