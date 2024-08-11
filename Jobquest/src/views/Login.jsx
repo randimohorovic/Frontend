@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Label, TextInput } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { SignInSuccess } from "../redux/user/userslice";
 
 export default function LogIn() {
   const [userData, setUserData] = useState({});
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setUserData({
@@ -22,7 +25,7 @@ export default function LogIn() {
     }
 
     try {
-      setError(null);
+      setError(null); //disaptch signinstart
       const res = await fetch("/backend/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,12 +33,13 @@ export default function LogIn() {
       });
 
       const data = await res.json();
-      console.log("Response Data:", data);
+      console.log("Response Data:", data); //disaptch failure
 
       if (data.success === false) {
         return setError(data.message);
       }
       if (res.ok) {
+        dispatch(SignInSuccess(data));
         navigate("/");
       }
     } catch (err) {
