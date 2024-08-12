@@ -3,10 +3,12 @@ import { Navbar, TextInput, Button } from "flowbite-react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom"; // da mozemo kroz rute ic
-
+import { useDispatch } from "react-redux";
+import { toggleTheme } from "../redux/tema/nightSlice";
 // header mi je fixan kroz cijelu apk pa mi treba kao komponenta
 export default function Baner() {
   const location = useLocation();
+  const dispatch = useDispatch();
   const ruta = location.pathname;
   return (
     <Navbar className="border-b-2  flex ">
@@ -37,6 +39,7 @@ export default function Baner() {
           className="w-12 h-10 hidden sm:inline"
           color="gray"
           round="true"
+          onClick={() => dispatch(toggleTheme())}
         >
           <FaMoon />
         </Button>
