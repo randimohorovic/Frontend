@@ -6,7 +6,7 @@ import About from "./views/About";
 import Profile from "./views/Profile";
 import Baner from "./components/Baner";
 import Footer from "./components/Footer";
-import Private from "./components/Private";
+//import Private from "./components/Private";
 
 export default function App() {
   return (
@@ -16,12 +16,8 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="log-in" element={<Login />} />
         <Route path="sign-up" element={<SignUp />} />
-        <Route path="about" element={<About />} />
-
-        <Route element={<Private />}>
-          {" "}
-          <Route path="profile" element={<Profile />} />
-        </Route>
+        <Route path="about" element={<About />} />{" "}
+        <Route path="profile" element={<Profile />} />
       </Routes>
       <Footer />
     </BrowserRouter>

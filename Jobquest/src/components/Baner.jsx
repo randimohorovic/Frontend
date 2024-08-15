@@ -47,7 +47,7 @@ export default function Baner() {
         </Button>
         <Link to="/log-in">
           {currentUser ? (
-            <p className=" w-15">{currentUser.username}</p>
+            <Link to="/profile">{currentUser.username}</Link>
           ) : (
             <button
               type="button"
