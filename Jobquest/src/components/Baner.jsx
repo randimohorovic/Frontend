@@ -3,12 +3,14 @@ import { Navbar, TextInput, Button } from "flowbite-react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom"; // da mozemo kroz rute ic
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../redux/tema/nightSlice";
+
 // header mi je fixan kroz cijelu apk pa mi treba kao komponenta
 export default function Baner() {
   const location = useLocation();
   const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.user);
   const ruta = location.pathname;
   return (
     <Navbar className="border-b-2  flex ">
@@ -44,12 +46,16 @@ export default function Baner() {
           <FaMoon />
         </Button>
         <Link to="/log-in">
-          <button
-            type="button"
-            className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800  hidden sm:inline font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-          >
-            Prijava
-          </button>
+          {currentUser ? (
+            <p className=" w-15">{currentUser.username}</p>
+          ) : (
+            <button
+              type="button"
+              className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800  hidden sm:inline font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+            >
+              Prijava
+            </button>
+          )}
         </Link>
         <Navbar.Toggle />
       </div>
