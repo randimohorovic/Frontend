@@ -2,10 +2,44 @@ import { useState } from "react";
 import { Label, TextInput } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import {
+  updateUserSuccess,
+  updateUserFailure,
+} from "../redux/user/userslice.js";
+import { useDispatch } from "react-redux";
 
 export default function profile() {
   const { currentUser } = useSelector((state) => state.user);
+  const [formData, setFormData] = useState({});
 
+  console.log(formData);
+  const userUpdate = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+  const updateSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`/backend/user/update/${currentUser._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(updateUserFailure(data.message));
+        return;
+      }
+
+      dispatch(updateUserSuccess(data));
+      setUpdateSuccess(true);
+    } catch (error) {
+      dispatch(updateUserFailure(error.message));
+    }
+  };
+
+  const dispatch = useDispatch();
   return (
     <div className="main-h-screen mt-20">
       <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
@@ -21,7 +55,7 @@ export default function profile() {
 
         {/* Right side */}
         <div className="flex-1">
-          <form className="flex flex-col gap-4">
+          <form onSubmit={updateSubmit} className="flex flex-col gap-4">
             <div>
               <Label value="Korisničko ime" />
               <TextInput
@@ -29,6 +63,7 @@ export default function profile() {
                 placeholder="Korisničko ime"
                 id="username"
                 defaultValue={currentUser.username}
+                onChange={userUpdate}
               />
             </div>
             <div>
@@ -38,11 +73,17 @@ export default function profile() {
                 placeholder="Email"
                 id="email"
                 defaultValue={currentUser.email}
+                onChange={userUpdate}
               />
             </div>
             <div>
               <Label value="Lozinka" />
-              <TextInput type="password" placeholder="Lozinka" id="password" />
+              <TextInput
+                type="password"
+                placeholder="Lozinka"
+                id="password"
+                onChange={userUpdate}
+              />
             </div>
             <button
               type="submit"
@@ -51,7 +92,7 @@ export default function profile() {
               Ažuriraj podatke
             </button>
           </form>
-          <div className="text-red-600 flex gap-1 mt-3 text-sm font-bold">
+          <div className="text-red-600 flex justify-between mt-5">
             <span className="cursor-pointer">Obriši račun</span>
             <span className="cursor-pointer">Odjavi se</span>
           </div>
