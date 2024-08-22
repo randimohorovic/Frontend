@@ -6,6 +6,7 @@ import About from "./views/About";
 import Profile from "./views/Profile";
 import Baner from "./components/Baner";
 import Footer from "./components/Footer";
+import Private from "./components/Private";
 //import Private from "./components/Private";
 
 export default function App() {
@@ -17,7 +18,9 @@ export default function App() {
         <Route path="log-in" element={<Login />} />
         <Route path="sign-up" element={<SignUp />} />
         <Route path="about" element={<About />} />{" "}
-        <Route path="profile" element={<Profile />} />
+        <Route element={<Private />}>
+          <Route path="profile" element={<Profile />} />
+        </Route>
       </Routes>
       <Footer />
     </BrowserRouter>

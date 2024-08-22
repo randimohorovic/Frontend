@@ -80,13 +80,13 @@ export default function Baner() {
           <Link to="/about"> O nama</Link>
         </Navbar.Link>
         <Navbar.Link
-          active={ruta === "/profil"}
+          active={ruta === "/profile"}
           as={"div"}
           className={`${
-            ruta === "/profil" ? "text-cyan-500" : "text-slate-700"
+            ruta === "/profile" ? "text-cyan-500" : "text-slate-700"
           } hover:text-blue-700`}
         >
-          <Link to="/profil">Profil </Link>
+          <Link to="/profile">Profil </Link>
         </Navbar.Link>
         <Navbar.Link
           active={ruta === "/logout"}

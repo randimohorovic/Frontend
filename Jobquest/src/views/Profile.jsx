@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import {
   updateUserSuccess,
   updateUserFailure,
+  logOutSuccess,
 } from "../redux/user/userslice.js";
 import { useDispatch } from "react-redux";
 
@@ -38,7 +39,21 @@ export default function profile() {
       dispatch(updateUserFailure(error.message));
     }
   };
-
+  const logOut = async () => {
+    try {
+      const res = await fetch("/backend/user/logout", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(logOutSuccess());
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   const dispatch = useDispatch();
   return (
     <div className="main-h-screen mt-20">
@@ -94,7 +109,9 @@ export default function profile() {
           </form>
           <div className="text-red-600 flex justify-between mt-5">
             <span className="cursor-pointer">Obriši račun</span>
-            <span className="cursor-pointer">Odjavi se</span>
+            <span onClick={logOut} className="cursor-pointer">
+              Odjavi se
+            </span>
           </div>
         </div>
       </div>
