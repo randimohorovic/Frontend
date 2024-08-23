@@ -7,6 +7,8 @@ import Profile from "./views/Profile";
 import Baner from "./components/Baner";
 import Footer from "./components/Footer";
 import Private from "./components/Private";
+import OnlyAdmin from "./components/OnlyAdmin";
+import Post from "./views/Post";
 //import Private from "./components/Private";
 
 export default function App() {
@@ -20,6 +22,9 @@ export default function App() {
         <Route path="about" element={<About />} />{" "}
         <Route element={<Private />}>
           <Route path="profile" element={<Profile />} />
+        </Route>
+        <Route element={<OnlyAdmin />}>
+          <Route path="post" element={<Post />} />
         </Route>
       </Routes>
       <Footer />
