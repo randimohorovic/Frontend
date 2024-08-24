@@ -64,7 +64,24 @@ export default function Post() {
             </option>
           </Select>
         </div>
-        <div className="flex gap-4 items-center justify-between border-4 border-cyan-500 border-dotted p-3"></div>
+        <div className="flex gap-4 items-center justify-between border-4 border-cyan-500 border-dotted p-3">
+          <TextInput
+            type="text"
+            placeholder="Satnica"
+            require
+            id="satnica"
+            className="flex-1"
+            onChange={(e) => setFormData({ ...formData, pay: e.target.value })}
+          />
+          <TextInput
+            type="text"
+            placeholder="Naziv poslodavca"
+            require
+            id="llc"
+            className="flex-1"
+            onChange={(e) => setFormData({ ...formData, llc: e.target.value })}
+          />
+        </div>
         <ReactQuill
           theme="snow"
           placeholder="Opis..."
