@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Private from "./components/Private";
 import OnlyAdmin from "./components/OnlyAdmin";
 import Post from "./views/Post";
+import PostPage from "./views/PostPage";
 //import Private from "./components/Private";
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
         <Route element={<OnlyAdmin />}>
           <Route path="post" element={<Post />} />
         </Route>
+        <Route path="/post/:posturlTitle" element={<PostPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>
