@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "flowbite-react";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import ReviewSection from "../components/ReviewSection";
 
 export default function PostPage() {
   const { posturlTitle } = useParams();
@@ -76,6 +77,7 @@ export default function PostPage() {
         className="p-3 max-w-2xl mx-auto w-full"
         dangerouslySetInnerHTML={{ __html: post && post.content }}
       ></div>
+      {post?._id && <ReviewSection postId={post._id} />}
     </main>
   );
 }
