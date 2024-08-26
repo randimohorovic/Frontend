@@ -2,18 +2,54 @@ import React from "react";
 import { Navbar, TextInput, Button } from "flowbite-react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom"; // da mozemo kroz rute ic
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../redux/tema/nightSlice";
+import { useEffect, useState } from "react";
+import { logOutSuccess } from "../redux/user/userslice.js";
 
-// header mi je fixan kroz cijelu apk pa mi treba kao komponenta
 export default function Baner() {
   const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
   const ruta = location.pathname;
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get("searchTerm");
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
+
+  const submitSearch = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set("searchTerm", searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
+
+  const logOut = async () => {
+    try {
+      const res = await fetch("/backend/user/logout", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(logOutSuccess());
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
-    <Navbar className="border-b-2  flex ">
+    <Navbar className="border-b-2 flex justify-between items-center px-4">
       <Link to="/" className=" ">
         <h1 className="font-bold text-sm sm:text-xl">
           <span className="px-2 py-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg text-white">
@@ -22,91 +58,76 @@ export default function Baner() {
         </h1>
       </Link>
 
-      <form className="flex items-center gap-2">
+      <form onSubmit={submitSearch} className="flex items-center gap-2">
         <TextInput
           type="text"
           placeholder="Pretraži..."
-          className="hidden lg:inline w-64"
+          className="w-full sm:w-64"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
         <Button
           type="submit"
           color="gray"
-          className="flex items-center px-4 py-2 w-12 h-10 lg:hidden pill"
+          className="flex items-center px-4 py-2 h-10"
         >
           <AiOutlineSearch />
         </Button>
       </form>
-      <div className="flex gap-2 md:order-2">
+
+      <div className="flex items-center gap-4">
         <Button
-          className="w-12 h-10 hidden sm:inline"
+          className="w-12 h-10"
           color="gray"
           round="true"
           onClick={() => dispatch(toggleTheme())}
         >
           <FaMoon />
         </Button>
-        <Link to="/log-in">
-          {currentUser ? (
-            <Link to="/profile">{currentUser.username}</Link>
-          ) : (
-            <button
-              type="button"
-              className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800  hidden sm:inline font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-            >
-              Prijava
-            </button>
-          )}
-        </Link>
-        <Navbar.Toggle />
-      </div>
-
-      <Navbar.Collapse>
-        <Navbar.Link
-          active={ruta === "/"}
-          as={"div"}
+        <Link
+          to="/"
           className={`${
             ruta === "/" ? "text-cyan-500" : "text-slate-700"
-          } hover:text-blue-700`}
+          } hover:text-blue-700 text-sm sm:text-base`}
         >
-          <Link to="/">Home </Link>
-        </Navbar.Link>
-        <Navbar.Link
-          active={ruta === "/about"}
-          as={"div"}
+          Home
+        </Link>
+        <Link
+          to="/about"
           className={`${
             ruta === "/about" ? "text-cyan-500" : "text-slate-700"
-          } hover:text-blue-700`}
+          } hover:text-blue-700 text-sm sm:text-base`}
         >
-          <Link to="/about"> O nama</Link>
-        </Navbar.Link>
-        <Navbar.Link
-          active={ruta === "/profile"}
-          as={"div"}
-          className={`${
-            ruta === "/profile" ? "text-cyan-500" : "text-slate-700"
-          } hover:text-blue-700`}
-        >
-          <Link to="/profile">Profil </Link>
-        </Navbar.Link>
-        <Navbar.Link
-          active={ruta === "/logout"}
-          as={"div"}
-          className={`${
-            ruta === "/logout" ? "text-cyan-500" : "text-slate-700"
-          } hover:text-white-700`}
-        >
-          <Link to="/logout">Odjava</Link>
-        </Navbar.Link>
-        <Navbar.Link
-          active={ruta === "/logout"}
-          as={"div"}
-          className={`${
-            ruta === "/sign-up" ? "text-cyan-500" : "text-slate-700"
-          } hover:text-white-700`}
-        >
-          <Link to="/sign-up">Kreiraj račun</Link>
-        </Navbar.Link>
-      </Navbar.Collapse>
+          O nama
+        </Link>
+        {currentUser ? (
+          <>
+            <Link to="/profile" className="text-sm sm:text-base">
+              {currentUser.username}
+            </Link>
+            <Link to="/log-in">
+              <button
+                type="button"
+                onClick={logOut}
+                className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              >
+                Odjava
+              </button>
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link to="/log-in">
+              <button
+                type="button"
+                className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              >
+                Prijava
+              </button>
+            </Link>
+          </>
+        )}
+      </div>
     </Navbar>
   );
 }

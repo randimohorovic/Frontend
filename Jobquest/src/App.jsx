@@ -10,6 +10,7 @@ import Private from "./components/Private";
 import OnlyAdmin from "./components/OnlyAdmin";
 import Post from "./views/Post";
 import PostPage from "./views/PostPage";
+import Search from "./views/Search";
 //import Private from "./components/Private";
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="log-in" element={<Login />} />
         <Route path="sign-up" element={<SignUp />} />
+        <Route path="search" element={<Search />} />
         <Route path="about" element={<About />} />{" "}
         <Route element={<Private />}>
           <Route path="profile" element={<Profile />} />

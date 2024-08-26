@@ -55,7 +55,7 @@ export default function PostPage() {
           {post && post.pay}&nbsp;€
         </span>
       </div>
-      {/* Details Section */}
+
       <div className="p-3 border-b border-slate-500 mx-auto w-full max-w-2xl text-sm">
         <div className="flex justify-between">
           <span className="font-semibold">Satnica</span>
