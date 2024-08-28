@@ -68,7 +68,7 @@ export default function Baner() {
         />
         <Button
           type="submit"
-          color="gray"
+          color=""
           className="flex items-center px-4 py-2 h-10"
         >
           <AiOutlineSearch />
@@ -77,8 +77,8 @@ export default function Baner() {
 
       <div className="flex items-center gap-4">
         <Button
-          className="w-12 h-10"
-          color="gray"
+          className="w-15 h-15"
+          color=""
           round="true"
           onClick={() => dispatch(toggleTheme())}
         >

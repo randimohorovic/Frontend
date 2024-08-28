@@ -19,16 +19,19 @@ export default function FooterCom() {
           </div>
           <div className="grid grid-cols-2 gap-8  mt-4 sm:grid-cols-3 sm:gp-6">
             <div>
-              <Footer.Title title="O nama" />
+              <Footer.Title title="Pišite nam" />
               <Footer.LinkGroup col>
-                <Footer.Link href="/" target="blank">
-                  stavka 1
+                <Footer.Link href="mailto:jobquest@gmail.hr.com" target="blank">
+                  jobquest@gmail.hr
                 </Footer.Link>
-                <Footer.Link href="/" target="blank">
-                  stavka 2
+                <Footer.Link
+                  href="mailto:jobquest_reply@gmail.hr.com"
+                  target="blank"
+                >
+                  jobquest_reply@gmail.hr
                 </Footer.Link>
-                <Footer.Link href="/" target="blank">
-                  stavka 3
+                <Footer.Link href="mailto:support@jobquest.com" target="blank">
+                  support@jobquest.com
                 </Footer.Link>
               </Footer.LinkGroup>
             </div>
@@ -52,14 +55,14 @@ export default function FooterCom() {
             <div>
               <Footer.Title title="O nama" />
               <Footer.LinkGroup col>
-                <Footer.Link href="/" target="blank">
-                  stavka 1
+                <Footer.Link href="/about" target="blank">
+                  Sta smo mi?
                 </Footer.Link>
                 <Footer.Link href="/" target="blank">
-                  stavka 2
+                  Vise informacija
                 </Footer.Link>
                 <Footer.Link href="/" target="blank">
-                  stavka 3
+                  Nadi nas
                 </Footer.Link>
               </Footer.LinkGroup>
             </div>

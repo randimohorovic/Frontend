@@ -55,7 +55,7 @@ export default function Search() {
     setSidebarData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const searchPost = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(sidebarData);
     const searchQuery = urlParams.toString();
@@ -86,7 +86,7 @@ export default function Search() {
   return (
     <div className="flex flex-col md:flex-row">
       <div className="p-7 border-b md:border-r md:min-h-screen border-gray-500">
-        <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-8" onSubmit={searchPost}>
           <div className="flex items-center gap-2">
             <label className="whitespace-nowrap font-semibold">Pretraži:</label>
             <TextInput

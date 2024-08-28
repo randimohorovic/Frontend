@@ -97,7 +97,7 @@ export default function SignUp() {
           </form>
           <div className="flex gap-1 mt-3 text-sm font-bold">
             <p>Imate li račun? </p>
-            <Link to="/sign-in">
+            <Link to="/log-in">
               <span className="text-cyan-600">Prijavi se</span>
             </Link>
           </div>

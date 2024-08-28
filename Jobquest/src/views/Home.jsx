@@ -44,7 +44,7 @@ export default function Home() {
               to={"/search"}
               className="text-lg text-teal-500 hover:underline text-center"
             >
-              View all posts
+              Učitaj više...
             </Link>
           </div>
         )}
