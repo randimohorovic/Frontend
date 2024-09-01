@@ -7,7 +7,7 @@ This is repository that will include everything that happens on the frontend of 
 - students finding a job or an internship
 - employers filling out forms and uploading them on the web app
 - students can leave feedback/rating on employers
-
+- Preview of application: https://youtu.be/wWVDRNEBPvY
 # JobQuest: Connecting Users with Job Opportunities
 
 **JobQuest** is a web application designed to connect users with various job opportunities. Whether you're a job seeker looking for new positions, JobQuest provides a streamlined platform to meet your needs.
